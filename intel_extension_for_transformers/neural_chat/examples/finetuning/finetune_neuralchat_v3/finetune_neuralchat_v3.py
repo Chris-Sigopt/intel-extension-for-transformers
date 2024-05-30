@@ -48,6 +48,7 @@ training_args = GaudiTrainingArguments(
     save_total_limit=10, bf16=True, use_habana=True,
     use_lazy_mode=True,
     report_to=None,
+    evaluation_strategy="no",
     deepspeed="ds_config.json"
 )
 finetune_args = FinetuningArguments(

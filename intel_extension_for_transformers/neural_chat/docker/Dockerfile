@@ -20,7 +20,7 @@
 # for more information.
 #
 # ============================================================================
-# How to build: 
+# How to build:
 #   docker build ./ -f Dockerfile -t chatbot_finetune:latest
 # If you need to use proxy, please use the following command
 #   docker build ./ --build-arg http_proxy=${http_proxy} --build-arg https_proxy=${http_proxy} -f Dockerfile -t chatbot_finetune:latest
@@ -82,7 +82,7 @@ WORKDIR /intel-extension-for-transformers/intel_extension_for_transformers/neura
 CMD ["/usr/sbin/sshd", "-D"]
 
 # HABANA environment
-FROM vault.habana.ai/gaudi-docker/1.13.0/ubuntu22.04/habanalabs/pytorch-installer-2.1.0:latest as hpu
+FROM vault.habana.ai/gaudi-docker/1.15.1/ubuntu22.04/habanalabs/pytorch-installer-2.2.0:latest as hpu
 
 ENV LANG=en_US.UTF-8
 ENV PYTHONPATH=/root:/usr/lib/habanalabs/
@@ -112,14 +112,14 @@ RUN cd /intel-extension-for-transformers && \
     pip list
 
 RUN git clone https://github.com/huggingface/optimum-habana.git && \
-    cd optimum-habana/ && git reset --hard 0dfda27dd0351d0753c35de2abb752309e2383b4 && pip install -e . && cd ../ && \
+    cd optimum-habana/ && git reset --hard 989484c60c22a217dd5f89d9d70a703162188b7f && pip install -e . && cd ../ && \
     cd ./optimum-habana/examples/text-generation/ && \
     pip install -r requirements.txt && \
     cd / && \
     pip install peft einops datasets && pip list && \
     git clone https://github.com/HabanaAI/DeepSpeed.git && \
     cd DeepSpeed && \
-    git checkout -b v1.15 origin/1.15.0 && \
+    git checkout -b v1.15 origin/1.15.1 && \
     pip install -e .
 
 # Install dependency
@@ -129,9 +129,9 @@ sed -i '/--extra-index-url https:\/\/download.pytorch.org\/whl\/cpu/d' requireme
     pip install -r requirements.txt && \
     cd /intel-extension-for-transformers/intel_extension_for_transformers/neural_chat/ && \
     pip install -r requirements_hpu.txt && \
-    pip install transformers==4.34.1 && \
-    pip install accelerate==0.24.0 && \
-    pip install datasets==2.14.7
+    pip install transformers==4.41.1 && \
+    pip install accelerate==0.30.1 && \
+    pip install datasets==2.19.1
 
 WORKDIR /intel-extension-for-transformers/intel_extension_for_transformers/neural_chat/
 

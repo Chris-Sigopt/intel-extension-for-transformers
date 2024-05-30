@@ -35,7 +35,7 @@ from transformers import (
 )
 
 from peft import (
-    prepare_model_for_int8_training,
+    prepare_model_for_kbit_training,
     LoraConfig,
     PeftModel,
     get_peft_model,
@@ -147,7 +147,9 @@ class DataTrainingArguments:
     pad_max: bool = field(
         default=False, metadata={"help": "Overwrite the cached training and evaluation sets"}
     )
-
+    evaluation_strategy: str = field(
+        default="no", metadata={"help": "One of 'no', 'steps' or 'epoch'"},
+    )
 
 @dataclass
 class FinetuningArguments:
