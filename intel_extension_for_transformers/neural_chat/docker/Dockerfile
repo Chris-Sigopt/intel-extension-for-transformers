@@ -129,8 +129,8 @@ sed -i '/--extra-index-url https:\/\/download.pytorch.org\/whl\/cpu/d' requireme
     pip install -r requirements.txt && \
     cd /intel-extension-for-transformers/intel_extension_for_transformers/neural_chat/ && \
     pip install -r requirements_hpu.txt && \
-    pip install transformers==4.41.1 && \
-    pip install accelerate==0.30.1 && \
+    pip install transformers==4.38.2 && \
+    pip install accelerate==0.27.2 && \
     pip install datasets==2.19.1
 
 WORKDIR /intel-extension-for-transformers/intel_extension_for_transformers/neural_chat/
